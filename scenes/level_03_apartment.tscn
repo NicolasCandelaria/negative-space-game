@@ -1,0 +1,180 @@
+[gd_scene load_steps=15 format=3 uid="uid://lvl03apartment"]
+
+[ext_resource type="Script" path="res://scripts/level_03_apartment.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://c7player01" path="res://scenes/player.tscn" id="2_player"]
+
+[sub_resource type="RectangleShape2D" id="Rect_n"]
+size = Vector2(980, 24)
+
+[sub_resource type="RectangleShape2D" id="Rect_s"]
+size = Vector2(980, 24)
+
+[sub_resource type="RectangleShape2D" id="Rect_w"]
+size = Vector2(24, 620)
+
+[sub_resource type="RectangleShape2D" id="Rect_e"]
+size = Vector2(24, 620)
+
+[sub_resource type="RectangleShape2D" id="Rect_sofa"]
+size = Vector2(230, 58)
+
+[sub_resource type="RectangleShape2D" id="Rect_table"]
+size = Vector2(114, 84)
+
+[sub_resource type="CircleShape2D" id="Circle_laptop"]
+radius = 112.0
+
+[sub_resource type="CircleShape2D" id="Circle_lamp"]
+radius = 86.0
+
+[sub_resource type="RectangleShape2D" id="Rect_photo"]
+size = Vector2(84, 60)
+
+[sub_resource type="RectangleShape2D" id="Rect_water"]
+size = Vector2(90, 78)
+
+[sub_resource type="RectangleShape2D" id="Rect_desk"]
+size = Vector2(114, 80)
+
+[sub_resource type="RectangleShape2D" id="Rect_return"]
+size = Vector2(120, 88)
+
+[node name="Level03Apartment" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Floor" type="Polygon2D" parent="."]
+z_index = -3
+color = Color(0.28, 0.27, 0.31, 1)
+polygon = PackedVector2Array(-480, -300, 480, -300, 480, 300, -480, 300)
+
+[node name="Walls" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="North" type="CollisionShape2D" parent="Walls"]
+position = Vector2(0, -312)
+shape = SubResource("Rect_n")
+
+[node name="South" type="CollisionShape2D" parent="Walls"]
+position = Vector2(0, 312)
+shape = SubResource("Rect_s")
+
+[node name="West" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-492, 0)
+shape = SubResource("Rect_w")
+
+[node name="East" type="CollisionShape2D" parent="Walls"]
+position = Vector2(492, 0)
+shape = SubResource("Rect_e")
+
+[node name="Sofa" type="StaticBody2D" parent="."]
+position = Vector2(-120, 110)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sofa"]
+shape = SubResource("Rect_sofa")
+
+[node name="Draw" type="Polygon2D" parent="Sofa"]
+color = Color(0.42, 0.36, 0.3, 1)
+polygon = PackedVector2Array(-118, -32, 118, -32, 118, 32, -118, 32)
+
+[node name="Table" type="StaticBody2D" parent="."]
+position = Vector2(-58, -34)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table"]
+shape = SubResource("Rect_table")
+
+[node name="Draw" type="Polygon2D" parent="Table"]
+color = Color(0.33, 0.27, 0.23, 1)
+polygon = PackedVector2Array(-58, -42, 58, -42, 58, 42, -58, 42)
+
+[node name="Woman" type="Polygon2D" parent="."]
+position = Vector2(144, -36)
+color = Color(0.75, 0.74, 0.84, 1)
+polygon = PackedVector2Array(-11, 12, 0, -12, 11, 12)
+
+[node name="LaptopGlow" type="Area2D" parent="."]
+position = Vector2(132, -28)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaptopGlow"]
+shape = SubResource("Circle_laptop")
+
+[node name="Visual" type="Polygon2D" parent="LaptopGlow"]
+z_index = -2
+color = Color(0.72, 0.78, 0.88, 0.16)
+polygon = PackedVector2Array(-118, -118, 118, -118, 118, 118, -118, 118)
+
+[node name="LampGlow" type="Area2D" parent="."]
+position = Vector2(-290, -192)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LampGlow"]
+shape = SubResource("Circle_lamp")
+
+[node name="Visual" type="Polygon2D" parent="LampGlow"]
+z_index = -2
+color = Color(0.96, 0.9, 0.7, 0.14)
+polygon = PackedVector2Array(-88, -88, 88, -88, 88, 88, -88, 88)
+
+[node name="PhotoPoint" type="Area2D" parent="."]
+position = Vector2(-360, -66)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhotoPoint"]
+shape = SubResource("Rect_photo")
+
+[node name="PhotoFrame" type="Polygon2D" parent="PhotoPoint"]
+color = Color(0.55, 0.5, 0.43, 1)
+polygon = PackedVector2Array(-46, -32, 46, -32, 46, 32, -46, 32)
+
+[node name="WaterPoint" type="Area2D" parent="."]
+position = Vector2(350, 170)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterPoint"]
+shape = SubResource("Rect_water")
+
+[node name="Sink" type="Polygon2D" parent="WaterPoint"]
+color = Color(0.48, 0.55, 0.61, 1)
+polygon = PackedVector2Array(-52, -42, 52, -42, 52, 42, -52, 42)
+
+[node name="DeskPoint" type="Area2D" parent="."]
+position = Vector2(278, -178)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeskPoint"]
+shape = SubResource("Rect_desk")
+
+[node name="Desk" type="Polygon2D" parent="DeskPoint"]
+color = Color(0.34, 0.29, 0.24, 1)
+polygon = PackedVector2Array(-64, -44, 64, -44, 64, 44, -64, 44)
+
+[node name="ReturnCorner" type="Area2D" parent="."]
+position = Vector2(-404, 226)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReturnCorner"]
+shape = SubResource("Rect_return")
+
+[node name="ShadowCorner" type="Polygon2D" parent="ReturnCorner"]
+color = Color(0.14, 0.14, 0.19, 1)
+polygon = PackedVector2Array(-66, -50, 66, -50, 66, 50, -66, 50)
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(-410, 220)

@@ -5,6 +5,7 @@ const DialogueUi := preload("res://scripts/dialogue_helper.gd")
 const LEVEL_SCENES = [
 	"res://scenes/level_01_storage.tscn",
 	"res://scenes/level_02_garage.tscn",
+	"res://scenes/level_03_apartment.tscn",
 ]
 
 @onready var _slot: Node = $LevelRoot
