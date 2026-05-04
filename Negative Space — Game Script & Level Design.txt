@@ -1,0 +1,120 @@
+Negative Space — Game Script & Level Design
+Proof of Concept — 8 Levels
+A note on structure: each level introduces one new mechanical idea and one new emotional beat. The mechanics escalate. The shadow's voice shifts across the arc — distant and bored at first, then gradually more present as the final human approaches. Dialogue is sparse by design. Silence is the shadow's natural language.
+
+Level 1 — The Storage Room
+Setting: A back room of a 24-hour convenience store. Fluorescent lights hum behind a closed door. Shelves cast deep shadows. One flickering bulb overhead.
+Mechanic introduced: Basic shadow movement. The player can only travel through connected dark areas. Light kills instantly.
+Design: Pure tutorial. The flickering bulb teaches timing — every few seconds the room goes dark and the shadow can cross open ground. No enemies. No dialogue from anyone but the shadow.
+Shadow's internal monologue (sparse, on-screen text):
+
+Another room. Another century. The light here is cheap and tired. It will not last the night.
+
+Why it doesn't get old: It's the shortest level. Two minutes. The player learns the rule and the tone simultaneously, then it ends before the novelty fades.
+
+Level 2 — The Parking Garage
+Setting: Underground parking. Pillars cast long shadows under sodium lamps. A security guard patrols with a flashlight.
+Mechanic introduced: Moving light sources. The shadow must track the guard's flashlight cone and reposition continuously.
+Design: The guard walks a fixed loop. The shadow learns to read the anticipation of light, not just react to it. One scripted moment: the guard stops, looks directly at the pillar the shadow is hiding behind, then moves on. Nothing happens. But the player feels seen.
+Overheard dialogue (guard, on phone):
+
+"Yeah I know, I know. Double shift again. Beth's pissed. I told her, the lights stay on, somebody's gotta watch them."
+
+Shadow's monologue (after the guard passes):
+
+He guards the light. The light does not guard him.
+
+Why it doesn't get old: The patrol pattern is short, but the level introduces tension without failure. The player escapes something that was never actually hunting them.
+
+Level 3 — The Apartment
+Setting: A small studio apartment at night. A woman is awake, lit only by her laptop screen. The shadow moves through her furniture, behind her, around her.
+Mechanic introduced: Soft light. Some light sources don't kill — they weaken. The shadow moves slower through dim ambient glow, faster through deep dark.
+Design: No enemies. No fail state. The level is about presence. The woman occasionally gets up — to refill water, to check her phone — and the shadow has to move out of her way without her noticing. She never does.
+Overheard, the woman talking to herself:
+
+"Okay. Okay. I'll send it tomorrow. Tomorrow morning. First thing."
+
+She closes the laptop. The room goes nearly black. The shadow expands across the entire floor.
+Shadow's monologue:
+
+She thinks she is alone. She has never been alone.
+
+Why it doesn't get old: It's the first level with a human you don't have to escape. It reframes the shadow's relationship to people. Not predator. Not prey. Witness.
+
+Level 4 — The Hospital Corridor
+Setting: A long hospital hallway at 3 AM. Motion-activated lights. The shadow must move only when sensors aren't tripped, and a janitor pushes a cart down the corridor.
+Mechanic introduced: Triggered light. The shadow's own movement can activate sensors if it crosses certain thresholds.
+Design: The hallway has three sections, each with different sensor patterns. The janitor moves slowly but steadily. The shadow has to stay ahead of him without triggering motion lights — which means stillness in some sections, speed in others. The rhythm is deliberately uncomfortable.
+Halfway through, an open patient room: A monitor beeps quietly. An old man sleeps under a single dim lamp. The shadow can pause here. Nothing happens. Just the beep, the breath, the dim light that the shadow can almost touch.
+Shadow's monologue:
+
+They build their endings under bright lights. They are afraid of what comes for everyone.
+
+Why it doesn't get old: The motion-light mechanic is the first real puzzle. Movement becomes a resource you ration. The hospital setting gives weight to a mechanic that could otherwise feel arbitrary.
+
+Level 5 — The Lighthouse
+Setting: The exterior of a working lighthouse on a cliff. The beam rotates on a fixed cycle. The shadow must climb the rocky path to the door at the base.
+Mechanic introduced: Predictable rotating light. Long sweep cycles where the shadow has to commit to movement during darkness windows, knowing the light will return.
+Design: This is the first level with a clear visual spectacle. The lighthouse beam sweeps across the ocean and the cliffs in long, slow arcs. The shadow's movement becomes choreographed — bursts of motion timed to the rhythm of the light. No enemies. The lighthouse itself is the antagonist.
+At the door, the shadow stops. There is no way in. The level ends.
+Shadow's monologue:
+
+I have been here before. Different stone. Same purpose. They will build a taller one when this falls.
+
+Why it doesn't get old: The visual scale shifts dramatically — outdoor, vertical, atmospheric. After four interior levels, the openness lands. The unreachable door also seeds a thematic note: the shadow is not trying to win. It is moving through.
+
+Level 6 — The Subway
+Setting: An empty late-night subway platform. Train arrivals flood the platform with light every ninety seconds. Between trains, the platform is dim but not dark — emergency lights stay on.
+Mechanic introduced: Combined timing and positioning. The shadow has to navigate ambient dim light continuously while preparing for periodic floods of full brightness from arriving trains.
+Design: The platform is long. There are pillars, benches, a closed kiosk. The shadow's task is to reach the far tunnel before three trains pass. Each train forces a complete repositioning. Between trains, a homeless man sleeps under a bench. The shadow passes near him repeatedly. He does not stir.
+Overheard, a recorded announcement, looping:
+
+"For your safety, please remain behind the yellow line. For your safety, the platform is monitored at all times. For your safety —"
+
+Shadow's monologue (after the third train):
+
+Safety. They have a word for the absence of dark. They do not have a word for the absence of light.
+
+Why it doesn't get old: Two layered timing systems — continuous dim-light navigation and periodic light floods — create the most mechanically demanding puzzle so far. The looping announcement gives the level a hypnotic quality.
+
+Level 7 — The Power Station
+Setting: A regional electrical substation. Floodlights everywhere. Cooling fans. The shadow has to cross a maintenance yard to reach a control building.
+Mechanic introduced: Interactive shadows. The shadow can briefly pull the shadows of objects — a parked truck, a transformer housing, a stack of crates — to extend its reach. Each pull costs something. The pulled shadow snaps back after a few seconds.
+Design: The hardest puzzle in the proof of concept. The yard has no natural path of darkness across it. The player has to chain shadow-pulls in sequence, timing each one so the next is reachable before the previous snaps back. Two security guards patrol with strong flashlights.
+Climax of the level: The shadow reaches the control building's exterior. Through a window, it sees a single technician at a console. The technician is alone, monitoring screens. He looks tired.
+Shadow's monologue:
+
+This is where they think the light comes from. They are wrong. The light comes from fear. This building only carries it.
+
+Why it doesn't get old: The shadow-pulling mechanic transforms the player from a passive avoider into an active manipulator of the environment. The level peaks the mechanical complexity right before the final level pulls everything back to silence.
+
+Level 8 — The House
+Setting: A small house on the edge of a town. Late evening. One lamp on in the living room. A man — middle-aged, alone — is reading.
+Mechanic introduced: None. Every mechanic from the previous levels is available, but the level uses almost none of them.
+Design: The shadow enters through the gap under the front door. The house is mostly dark — the shadow can move freely. The man reads. He does not look up.
+The shadow moves through the rooms. There are photographs. A woman, no longer present. A child, grown. A life lived under warm electric light. The shadow lingers in each room. There is no time pressure.
+Eventually, the shadow returns to the living room. It positions itself across from the man, in the dark corner of the room.
+The man looks up.
+He sees it.
+He does not flinch. He does not run. He has been waiting, in a way he could not have explained to anyone.
+Dialogue — the only real dialogue in the game:
+
+Man: "You've been here before. Haven't you."
+Shadow: Yes.
+Man: "How long."
+Shadow: Longer than this house. Longer than the word for house.
+Man: "And if I turn it off."
+Shadow: You know what happens.
+Man: "Yeah."
+(A long pause.)
+Man: "Okay."
+
+He reaches over and clicks off the lamp.
+The room goes black. The shadow expands across the entire screen.
+There is a long silence. Then — gradually — the shadow contracts back to a small shape. A human shape, briefly. Then less than that. Then nothing where the man was sitting.
+The shadow moves to the door. Pauses. Leaves.
+Final on-screen text, after the game ends:
+
+The dark is older than this. It will be older than what comes next.
+
+Credits roll over a black screen with no music.

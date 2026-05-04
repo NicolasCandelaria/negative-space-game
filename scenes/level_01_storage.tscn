@@ -1,0 +1,131 @@
+[gd_scene load_steps=12 format=3 uid="uid://d4lvlstor"]
+
+[ext_resource type="Script" path="res://scripts/level_01_storage.gd" id="1_level"]
+[ext_resource type="PackedScene" uid="uid://c7player01" path="res://scenes/player.tscn" id="2_player"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n"]
+size = Vector2(920, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s"]
+size = Vector2(920, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w"]
+size = Vector2(24, 560)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e"]
+size = Vector2(24, 560)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shelf_w"]
+size = Vector2(64, 192)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shelf_e"]
+size = Vector2(64, 240)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kill"]
+radius = 132.0
+
+[sub_resource type="Gradient" id="Gradient_light"]
+offsets = PackedFloat32Array(0, 0.65, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.85, 0.82, 0.75, 0.45, 0.2, 0.2, 0.22, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_light"]
+gradient = SubResource("Gradient_light")
+width = 384
+height = 384
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exit"]
+size = Vector2(80, 48)
+
+[node name="Level01Storage" type="Node2D"]
+script = ExtResource("1_level")
+
+[node name="Floor" type="Polygon2D" parent="."]
+z_index = -2
+color = Color(0.32, 0.33, 0.38, 1)
+polygon = PackedVector2Array(-448, -268, 448, -268, 448, 268, -448, 268)
+
+[node name="Walls" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="North" type="CollisionShape2D" parent="Walls"]
+position = Vector2(0, -280)
+shape = SubResource("RectangleShape2D_n")
+
+[node name="South" type="CollisionShape2D" parent="Walls"]
+position = Vector2(0, 280)
+shape = SubResource("RectangleShape2D_s")
+
+[node name="West" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-460, 0)
+shape = SubResource("RectangleShape2D_w")
+
+[node name="East" type="CollisionShape2D" parent="Walls"]
+position = Vector2(460, 0)
+shape = SubResource("RectangleShape2D_e")
+
+[node name="ShelfWest" type="StaticBody2D" parent="."]
+position = Vector2(-220, -40)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShelfWest"]
+shape = SubResource("RectangleShape2D_shelf_w")
+
+[node name="Block" type="Polygon2D" parent="ShelfWest"]
+color = Color(0.24, 0.25, 0.3, 1)
+polygon = PackedVector2Array(-32, -96, 32, -96, 32, 96, -32, 96)
+
+[node name="ShelfEast" type="StaticBody2D" parent="."]
+position = Vector2(200, 40)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShelfEast"]
+shape = SubResource("RectangleShape2D_shelf_e")
+
+[node name="Block" type="Polygon2D" parent="ShelfEast"]
+color = Color(0.24, 0.25, 0.3, 1)
+polygon = PackedVector2Array(-32, -120, 32, -120, 32, 120, -32, 120)
+
+[node name="KillZone" type="Area2D" parent="."]
+position = Vector2(40, -20)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+monitorable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
+shape = SubResource("CircleShape2D_kill")
+
+[node name="PointLight2D" type="PointLight2D" parent="KillZone"]
+blend_mode = 1
+color = Color(1, 0.96, 0.86, 1)
+energy = 2.1
+shadow_enabled = false
+texture = SubResource("GradientTexture2D_light")
+texture_scale = 2.45
+
+[node name="Exit" type="Area2D" parent="."]
+position = Vector2(340, 232)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
+shape = SubResource("RectangleShape2D_exit")
+
+[node name="ExitGlow" type="Polygon2D" parent="Exit"]
+z_index = -1
+color = Color(0.42, 0.58, 0.46, 1)
+polygon = PackedVector2Array(-44, -26, 44, -26, 44, 26, -44, 26)
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(-320, 100)
+
+[node name="FlickerTimer" type="Timer" parent="."]
+wait_time = 1.4
+one_shot = true
