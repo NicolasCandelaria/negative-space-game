@@ -1,0 +1,262 @@
+[gd_scene load_steps=12 format=3 uid="uid://lvl04hospital"]
+
+[ext_resource type="Script" path="res://scripts/level_04_hospital.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://c7player01" path="res://scenes/player.tscn" id="2_player"]
+
+[sub_resource type="RectangleShape2D" id="Rect_n"]
+size = Vector2(420, 24)
+
+[sub_resource type="RectangleShape2D" id="Rect_s"]
+size = Vector2(420, 24)
+
+[sub_resource type="RectangleShape2D" id="Rect_w"]
+size = Vector2(24, 640)
+
+[sub_resource type="RectangleShape2D" id="Rect_e"]
+size = Vector2(24, 640)
+
+[sub_resource type="RectangleShape2D" id="Rect_sensor_a"]
+size = Vector2(218, 146)
+
+[sub_resource type="RectangleShape2D" id="Rect_sensor_b"]
+size = Vector2(218, 146)
+
+[sub_resource type="RectangleShape2D" id="Rect_sensor_c"]
+size = Vector2(218, 146)
+
+[sub_resource type="RectangleShape2D" id="Rect_exit"]
+size = Vector2(170, 52)
+
+[sub_resource type="RectangleShape2D" id="Rect_janitor_touch"]
+size = Vector2(74, 34)
+
+[sub_resource type="RectangleShape2D" id="Rect_patient"]
+size = Vector2(120, 86)
+
+[node name="Level04Hospital" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Floor" type="Polygon2D" parent="."]
+z_index = -5
+color = Color(0.03, 0.03, 0.05, 1)
+polygon = PackedVector2Array(-480, -320, 480, -320, 480, 320, -480, 320)
+
+[node name="Corridor" type="Polygon2D" parent="."]
+z_index = -4
+color = Color(0.08, 0.08, 0.11, 1)
+polygon = PackedVector2Array(-110, -300, 110, -300, 110, 300, -110, 300)
+
+[node name="Walls" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="North" type="CollisionShape2D" parent="Walls"]
+position = Vector2(0, -312)
+shape = SubResource("Rect_n")
+
+[node name="South" type="CollisionShape2D" parent="Walls"]
+position = Vector2(0, 312)
+shape = SubResource("Rect_s")
+
+[node name="West" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-122, 0)
+shape = SubResource("Rect_w")
+
+[node name="East" type="CollisionShape2D" parent="Walls"]
+position = Vector2(122, 0)
+shape = SubResource("Rect_e")
+
+[node name="SensorA" type="Area2D" parent="."]
+position = Vector2(0, 180)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SensorA"]
+shape = SubResource("Rect_sensor_a")
+
+[node name="HazardA" type="Area2D" parent="."]
+position = Vector2(0, 180)
+collision_layer = 0
+collision_mask = 1
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HazardA"]
+shape = SubResource("Rect_sensor_a")
+
+[node name="LightA" type="Label" parent="."]
+visible = false
+position = Vector2(0, 179)
+offset_left = -100.0
+offset_top = -16.0
+offset_right = 100.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(1, 0.95, 0.65, 1)
+theme_override_font_sizes/font_size = 20
+text = "< LIGHT: ON >"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SensorB" type="Area2D" parent="."]
+position = Vector2(0, 10)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SensorB"]
+shape = SubResource("Rect_sensor_b")
+
+[node name="HazardB" type="Area2D" parent="."]
+position = Vector2(0, 10)
+collision_layer = 0
+collision_mask = 1
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HazardB"]
+shape = SubResource("Rect_sensor_b")
+
+[node name="LightB" type="Label" parent="."]
+visible = false
+position = Vector2(0, 9)
+offset_left = -100.0
+offset_top = -16.0
+offset_right = 100.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(1, 0.95, 0.65, 1)
+theme_override_font_sizes/font_size = 20
+text = "< LIGHT: ON >"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SensorC" type="Area2D" parent="."]
+position = Vector2(0, -160)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SensorC"]
+shape = SubResource("Rect_sensor_c")
+
+[node name="HazardC" type="Area2D" parent="."]
+position = Vector2(0, -160)
+collision_layer = 0
+collision_mask = 1
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HazardC"]
+shape = SubResource("Rect_sensor_c")
+
+[node name="LightC" type="Label" parent="."]
+visible = false
+position = Vector2(0, -161)
+offset_left = -100.0
+offset_top = -16.0
+offset_right = 100.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(1, 0.95, 0.65, 1)
+theme_override_font_sizes/font_size = 20
+text = "< LIGHT: ON >"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitZone" type="Area2D" parent="."]
+position = Vector2(0, -275)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitZone"]
+shape = SubResource("Rect_exit")
+
+[node name="AsciiExit" type="Label" parent="ExitZone"]
+offset_left = -90.0
+offset_top = -16.0
+offset_right = 90.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0.62, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "=== EXIT ==="
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PatientPause" type="Area2D" parent="."]
+position = Vector2(180, -28)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PatientPause"]
+shape = SubResource("Rect_patient")
+
+[node name="PatientAscii" type="Label" parent="PatientPause"]
+offset_left = -70.0
+offset_top = -30.0
+offset_right = 70.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(0.82, 0.88, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "[ patient ]
+  b e e p"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Janitor" type="Node2D" parent="."]
+position = Vector2(0, 260)
+
+[node name="Touch" type="Area2D" parent="Janitor"]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Janitor/Touch"]
+shape = SubResource("Rect_janitor_touch")
+
+[node name="Ascii" type="Label" parent="Janitor"]
+offset_left = -64.0
+offset_top = -16.0
+offset_right = 64.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(1, 0.72, 0.62, 1)
+theme_override_font_sizes/font_size = 18
+text = "[J]---cart"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(0, 270)
+
+[node name="TimerA" type="Timer" parent="."]
+one_shot = true
+
+[node name="TimerB" type="Timer" parent="."]
+one_shot = true
+
+[node name="TimerC" type="Timer" parent="."]
+one_shot = true
+
+[node name="AsciiFrame" type="Label" parent="."]
+z_index = 8
+offset_left = -430.0
+offset_top = -300.0
+offset_right = 430.0
+offset_bottom = 300.0
+theme_override_colors/font_color = Color(0.45, 0.52, 0.62, 1)
+theme_override_font_sizes/font_size = 16
+text = "################################################################
+#                                                              #
+#                      HOSPITAL CORRIDOR                       #
+#                                                              #
+#                                                              #
+#                                                              #
+#                                                              #
+#                                                              #
+#                                                              #
+#                                                              #
+#                                                              #
+#                                                              #
+#                                                              #
+#                                                              #
+#                                                              #
+################################################################"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -43,8 +43,8 @@ size = Vector2(80, 48)
 script = ExtResource("1_level")
 
 [node name="Floor" type="Polygon2D" parent="."]
-z_index = -2
-color = Color(0.32, 0.33, 0.38, 1)
+z_index = -4
+color = Color(0.03, 0.03, 0.05, 1)
 polygon = PackedVector2Array(-448, -268, 448, -268, 448, 268, -448, 268)
 
 [node name="Walls" type="StaticBody2D" parent="."]
@@ -76,8 +76,19 @@ collision_mask = 0
 shape = SubResource("RectangleShape2D_shelf_w")
 
 [node name="Block" type="Polygon2D" parent="ShelfWest"]
-color = Color(0.24, 0.25, 0.3, 1)
+color = Color(0, 0, 0, 0)
 polygon = PackedVector2Array(-32, -96, 32, -96, 32, 96, -32, 96)
+
+[node name="Ascii" type="Label" parent="ShelfWest"]
+offset_left = -44.0
+offset_top = -66.0
+offset_right = 44.0
+offset_bottom = 67.0
+theme_override_colors/font_color = Color(0.85, 0.85, 0.88, 1)
+theme_override_font_sizes/font_size = 18
+text = "####\n####\n####\n####"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ShelfEast" type="StaticBody2D" parent="."]
 position = Vector2(200, 40)
@@ -88,8 +99,19 @@ collision_mask = 0
 shape = SubResource("RectangleShape2D_shelf_e")
 
 [node name="Block" type="Polygon2D" parent="ShelfEast"]
-color = Color(0.24, 0.25, 0.3, 1)
+color = Color(0, 0, 0, 0)
 polygon = PackedVector2Array(-32, -120, 32, -120, 32, 120, -32, 120)
+
+[node name="Ascii" type="Label" parent="ShelfEast"]
+offset_left = -44.0
+offset_top = -78.0
+offset_right = 44.0
+offset_bottom = 79.0
+theme_override_colors/font_color = Color(0.85, 0.85, 0.88, 1)
+theme_override_font_sizes/font_size = 18
+text = "####\n####\n####\n####\n####"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="KillZone" type="Area2D" parent="."]
 position = Vector2(40, -20)
@@ -120,8 +142,31 @@ shape = SubResource("RectangleShape2D_exit")
 
 [node name="ExitGlow" type="Polygon2D" parent="Exit"]
 z_index = -1
-color = Color(0.42, 0.58, 0.46, 1)
+color = Color(0, 0, 0, 0)
 polygon = PackedVector2Array(-44, -26, 44, -26, 44, 26, -44, 26)
+
+[node name="AsciiExit" type="Label" parent="Exit"]
+offset_left = -52.0
+offset_top = -15.0
+offset_right = 52.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0.6, 1, 0.7, 1)
+theme_override_font_sizes/font_size = 18
+text = "[ EXIT ]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AsciiFrame" type="Label" parent="."]
+z_index = 8
+offset_left = -430.0
+offset_top = -245.0
+offset_right = 430.0
+offset_bottom = 245.0
+theme_override_colors/font_color = Color(0.45, 0.52, 0.62, 1)
+theme_override_font_sizes/font_size = 16
+text = "################################################################\n#                                                              #\n#                      STORAGE ROOM                            #\n#                                                              #\n#                                                              #\n#                                                              #\n#                                                              #\n#                                                              #\n#                                                              #\n#                                                              #\n#                                                              #\n#                                                              #\n#                                                              #\n################################################################"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Player" parent="." instance=ExtResource("2_player")]
 position = Vector2(-320, 100)

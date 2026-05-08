@@ -6,6 +6,11 @@ const LEVEL_SCENES = [
 	"res://scenes/level_01_storage.tscn",
 	"res://scenes/level_02_garage.tscn",
 	"res://scenes/level_03_apartment.tscn",
+	"res://scenes/level_04_hospital.tscn",
+	"res://scenes/level_05_lighthouse.tscn",
+	"res://scenes/level_06_subway.tscn",
+	"res://scenes/level_07_power_station.tscn",
+	"res://scenes/level_08_house.tscn",
 ]
 
 @onready var _slot: Node = $LevelRoot

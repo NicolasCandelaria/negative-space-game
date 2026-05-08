@@ -1,0 +1,190 @@
+[gd_scene load_steps=11 format=3 uid="uid://lvl05lighthouse"]
+
+[ext_resource type="Script" path="res://scripts/level_05_lighthouse.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://c7player01" path="res://scenes/player.tscn" id="2_player"]
+
+[sub_resource type="RectangleShape2D" id="Rect_bound_n"]
+size = Vector2(980, 24)
+
+[sub_resource type="RectangleShape2D" id="Rect_bound_s"]
+size = Vector2(980, 24)
+
+[sub_resource type="RectangleShape2D" id="Rect_bound_w"]
+size = Vector2(24, 620)
+
+[sub_resource type="RectangleShape2D" id="Rect_bound_e"]
+size = Vector2(24, 620)
+
+[sub_resource type="RectangleShape2D" id="Rect_path1"]
+size = Vector2(300, 66)
+
+[sub_resource type="RectangleShape2D" id="Rect_path2"]
+size = Vector2(220, 66)
+
+[sub_resource type="RectangleShape2D" id="Rect_path3"]
+size = Vector2(180, 66)
+
+[sub_resource type="ConvexPolygonShape2D" id="BeamShape"]
+points = PackedVector2Array(0, 0, 360, 120, 360, -120)
+
+[sub_resource type="RectangleShape2D" id="DoorShape"]
+size = Vector2(120, 54)
+
+[node name="Level05Lighthouse" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Sea" type="Polygon2D" parent="."]
+z_index = -6
+color = Color(0.02, 0.02, 0.05, 1)
+polygon = PackedVector2Array(-500, -320, 500, -320, 500, 320, -500, 320)
+
+[node name="Cliff" type="Polygon2D" parent="."]
+z_index = -5
+color = Color(0.08, 0.08, 0.12, 1)
+polygon = PackedVector2Array(-430, 260, -360, 220, -280, 140, -190, 100, -80, 40, 40, -10, 150, -70, 240, -120, 318, -162, 360, -210, 420, -260, 460, -320, -500, -320, -500, 320)
+
+[node name="Bounds" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="North" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(0, -312)
+shape = SubResource("Rect_bound_n")
+
+[node name="South" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(0, 312)
+shape = SubResource("Rect_bound_s")
+
+[node name="West" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(-492, 0)
+shape = SubResource("Rect_bound_w")
+
+[node name="East" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(492, 0)
+shape = SubResource("Rect_bound_e")
+
+[node name="PathBlockA" type="StaticBody2D" parent="."]
+position = Vector2(-165, 152)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathBlockA"]
+shape = SubResource("Rect_path1")
+
+[node name="Ascii" type="Label" parent="PathBlockA"]
+offset_left = -150.0
+offset_top = -18.0
+offset_right = 150.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.85, 0.85, 0.92, 1)
+theme_override_font_sizes/font_size = 18
+text = "########################"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PathBlockB" type="StaticBody2D" parent="."]
+position = Vector2(62, 20)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathBlockB"]
+shape = SubResource("Rect_path2")
+
+[node name="Ascii" type="Label" parent="PathBlockB"]
+offset_left = -110.0
+offset_top = -18.0
+offset_right = 110.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.85, 0.85, 0.92, 1)
+theme_override_font_sizes/font_size = 18
+text = "##################"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PathBlockC" type="StaticBody2D" parent="."]
+position = Vector2(238, -112)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathBlockC"]
+shape = SubResource("Rect_path3")
+
+[node name="Ascii" type="Label" parent="PathBlockC"]
+offset_left = -90.0
+offset_top = -18.0
+offset_right = 90.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.85, 0.85, 0.92, 1)
+theme_override_font_sizes/font_size = 18
+text = "##############"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Lighthouse" type="Node2D" parent="."]
+position = Vector2(344, -244)
+
+[node name="TowerAscii" type="Label" parent="Lighthouse"]
+offset_left = -54.0
+offset_top = -76.0
+offset_right = 54.0
+offset_bottom = 76.0
+theme_override_colors/font_color = Color(0.94, 0.94, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "  /\\  \n /##\\ \n |##| \n |##| \n |[]| "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BeamHazard" type="Area2D" parent="Lighthouse"]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lighthouse/BeamHazard"]
+shape = SubResource("BeamShape")
+
+[node name="BeamAscii" type="Label" parent="Lighthouse"]
+position = Vector2(156, 0)
+offset_left = -92.0
+offset_top = -16.0
+offset_right = 92.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(1, 0.94, 0.7, 1)
+theme_override_font_sizes/font_size = 18
+text = ">>>>>>>>>>>>>"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DoorZone" type="Area2D" parent="."]
+position = Vector2(352, -180)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorZone"]
+shape = SubResource("DoorShape")
+
+[node name="DoorAscii" type="Label" parent="DoorZone"]
+offset_left = -70.0
+offset_top = -18.0
+offset_right = 70.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.62, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "[ LOCKED DOOR ]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(-396, 236)
+
+[node name="AsciiFrame" type="Label" parent="."]
+z_index = 8
+offset_left = -458.0
+offset_top = -298.0
+offset_right = 458.0
+offset_bottom = 298.0
+theme_override_colors/font_color = Color(0.45, 0.52, 0.62, 1)
+theme_override_font_sizes/font_size = 16
+text = "################################################################\n#                                                              #\n#                         LIGHTHOUSE                           #\n#                                                              #\n#                                                              #\n#                                                              #\n#                                                              #\n#                                                              #\n#                                                              #\n#                                                              #\n#                                                              #\n#                                                              #\n#                                                              #\n#                                                              #\n################################################################"
+horizontal_alignment = 1
+vertical_alignment = 1
