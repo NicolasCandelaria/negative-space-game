@@ -5,6 +5,6 @@
 /.mono/
 /data_*/
 export.cfg
-export_presets.cfg
+build/
 web_export/
 Modern tiles_Free/
