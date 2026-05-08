@@ -28,12 +28,15 @@ jobs:
           mkdir -p "$HOME/.local/share/godot/export_templates"
           cp -r /root/.local/share/godot/export_templates/. "$HOME/.local/share/godot/export_templates/"
 
+      # Container jobs mount the repo at $GITHUB_WORKSPACE (e.g. /github/workspace).
+      # ${{ github.workspace }} can still be /home/runner/work/... and must not be mixed
+      # with mkdir paths or Godot will look for a non-existent build folder.
       - name: Export Web (HTML5)
-        working-directory: ${{ github.workspace }}
         run: |
-          mkdir -p build
-          godot --headless --verbose --export-release "Web" "${{ github.workspace }}/build/index.html"
-          touch build/.nojekyll
+          mkdir -p "$GITHUB_WORKSPACE/build"
+          cd "$GITHUB_WORKSPACE"
+          godot --headless --verbose --export-release "Web" "$GITHUB_WORKSPACE/build/index.html"
+          touch "$GITHUB_WORKSPACE/build/.nojekyll"
 
       - name: Upload Pages artifact
         uses: actions/upload-artifact@v4
