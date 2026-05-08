@@ -1,0 +1,188 @@
+[gd_scene load_steps=2 format=3 uid="uid://ui_layer01"]
+
+[ext_resource type="Script" path="res://scripts/ui_controller.gd" id="1_ui"]
+
+[node name="UILayer" type="CanvasLayer"]
+layer = 110
+script = ExtResource("1_ui")
+
+[node name="Hints" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -52.0
+offset_right = 720.0
+offset_bottom = -12.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.55, 0.72, 0.62, 0.85)
+theme_override_font_sizes/font_size = 14
+text = "Hints"
+
+[node name="LevelBanner" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -280.0
+offset_top = 16.0
+offset_right = 280.0
+offset_bottom = 56.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.75, 1, 0.92, 1)
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+text = "Level"
+
+[node name="BootMenu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="BootMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -56.0
+offset_right = 140.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="ContinueBtn" type="Button" parent="BootMenu/VBox"]
+layout_mode = 2
+text = "Continue"
+
+[node name="NewGameBtn" type="Button" parent="BootMenu/VBox"]
+layout_mode = 2
+text = "New Game"
+
+[node name="PauseMenu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -260.0
+offset_right = 220.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="PauseMenu/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = -14.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="ResumeBtn" type="Button" parent="PauseMenu/Panel/VBox"]
+layout_mode = 2
+text = "Resume"
+
+[node name="RestartBtn" type="Button" parent="PauseMenu/Panel/VBox"]
+layout_mode = 2
+text = "Restart level"
+
+[node name="FullscreenBtn" type="Button" parent="PauseMenu/Panel/VBox"]
+layout_mode = 2
+text = "Toggle fullscreen"
+
+[node name="MouseMoveCheck" type="CheckBox" parent="PauseMenu/Panel/VBox"]
+layout_mode = 2
+button_pressed = false
+text = "Hold LMB to steer toward mouse"
+
+[node name="SfxCheck" type="CheckBox" parent="PauseMenu/Panel/VBox"]
+layout_mode = 2
+button_pressed = true
+text = "Sound effects"
+
+[node name="SmallTextBtn" type="Button" parent="PauseMenu/Panel/VBox"]
+layout_mode = 2
+text = "Dialogue: smaller text"
+
+[node name="LargeTextBtn" type="Button" parent="PauseMenu/Panel/VBox"]
+layout_mode = 2
+text = "Dialogue: larger text"
+
+[node name="ControlsBlock" type="Label" parent="PauseMenu/Panel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+autowrap_mode = 3
+text = "Controls"
+
+[node name="WebAudioGate" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="WebAudioGate"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.03, 0.05, 0.92)
+
+[node name="CenterContainer" type="CenterContainer" parent="WebAudioGate"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="WebAudioGate/CenterContainer"]
+layout_mode = 2
+text = "Click to enable audio & continue"
+
+[node name="DebugHud" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -280.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = 120.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.55, 1, 0.65, 0.9)
+theme_override_font_sizes/font_size = 13
+text = "Debug"

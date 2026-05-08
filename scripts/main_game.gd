@@ -13,20 +13,46 @@ const LEVEL_SCENES = [
 	"res://scenes/level_08_house.tscn",
 ]
 
+const LEVEL_NAMES: PackedStringArray = [
+	"Storage",
+	"Garage",
+	"Apartment",
+	"Hospital corridor",
+	"Lighthouse",
+	"Subway",
+	"Power station",
+	"House",
+]
+
+signal level_loaded(index: int, display_name: String)
+
 @onready var _slot: Node = $LevelRoot
 
 var _level_index: int = -1
+var _restart_running: bool = false
+
+var current_level_index: int:
+	get:
+		return _level_index
 
 
 func _ready() -> void:
 	add_to_group("game_main")
-	_spawn_index(0)
+	GameSettings.load_all()
+
+
+func start_at_level(idx: int) -> void:
+	_spawn_index(idx)
 
 
 func restart_current_level() -> void:
 	if _level_index < 0 or _level_index >= LEVEL_SCENES.size():
 		return
-	_spawn_index(_level_index)
+	if _restart_running:
+		return
+	_restart_running = true
+	await _spawn_index(_level_index)
+	_restart_running = false
 
 
 func _spawn_index(i: int) -> void:
@@ -42,11 +68,15 @@ func _spawn_index(i: int) -> void:
 	var packed: PackedScene = load(LEVEL_SCENES[i])
 	var inst: Node = packed.instantiate()
 	_slot.add_child(inst)
+	GameSettings.on_level_started(i)
+	level_loaded.emit(i, LEVEL_NAMES[i])
 	if inst.has_signal("completed"):
 		inst.completed.connect(_on_level_completed.bind(i))
 
 
 func _on_level_completed(finished_index: int) -> void:
+	GameSettings.on_level_completed(finished_index)
+	GameAudio.play_exit()
 	_spawn_index(finished_index + 1)
 
 

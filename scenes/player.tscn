@@ -1,6 +1,7 @@
-[gd_scene format=3 uid="uid://c7player01"]
+[gd_scene load_steps=3 format=3 uid="uid://c7player01"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_player"]
+[ext_resource type="Script" path="res://scripts/camera_shake.gd" id="2_cam"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_player"]
 radius = 11.0
@@ -29,3 +30,4 @@ vertical_alignment = 1
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 position_smoothing_speed = 12.0
+script = ExtResource("2_cam")

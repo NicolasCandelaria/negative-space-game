@@ -3,6 +3,7 @@ extends CharacterBody2D
 signal died
 
 const SPEED := 220.0
+const SPAWN_INVULN_SECONDS := 1.05
 
 ## When true, movement input is ignored (e.g. level complete).
 var input_frozen: bool = false
@@ -10,12 +11,21 @@ var input_frozen: bool = false
 ## Runtime movement scale for level mechanics (e.g. soft-light slowdown).
 var speed_scale: float = 1.0
 
+var invulnerable_seconds: float = 0.0
 
-func _physics_process(_delta: float) -> void:
+
+func _ready() -> void:
+	invulnerable_seconds = SPAWN_INVULN_SECONDS
+
+
+func _physics_process(delta: float) -> void:
+	if invulnerable_seconds > 0.0:
+		invulnerable_seconds -= delta
 	if input_frozen:
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
+
 	var dir := Vector2.ZERO
 	if Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT):
 		dir.x -= 1.0
@@ -25,10 +35,25 @@ func _physics_process(_delta: float) -> void:
 		dir.y -= 1.0
 	if Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN):
 		dir.y += 1.0
-	dir = dir.normalized()
+
+	if GameSettings.mouse_move_enabled and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		var to_mouse := get_global_mouse_position() - global_position
+		if to_mouse.length_squared() > 25.0:
+			dir = to_mouse.normalized()
+
+	if dir.length_squared() > 0.0:
+		dir = dir.normalized()
+
 	velocity = dir * SPEED * speed_scale
 	move_and_slide()
 
 
+func is_invulnerable() -> bool:
+	return invulnerable_seconds > 0.0
+
+
 func die() -> void:
+	if is_invulnerable():
+		return
+	GameAudio.play_death()
 	died.emit()

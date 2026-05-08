@@ -8,7 +8,12 @@ const DialogueUi := preload("res://scripts/dialogue_helper.gd")
 signal completed
 
 const SEGMENT_ACTIVE_SECONDS := 1.4
-const JANITOR_SPEED := 34.0
+## Brief warning before the hazard collider turns on (sensor + hazard shared the same rect).
+const HAZARD_ARM_DELAY := 0.48
+const JANITOR_SPEED_MAX := 34.0
+const JANITOR_SPEED_MIN := 14.0
+## Seconds until janitor reaches full speed (ease-in).
+const JANITOR_RAMP_DURATION := 6.0
 
 @onready var _player: CharacterBody2D = $Player
 @onready var _exit_zone: Area2D = $ExitZone
@@ -23,6 +28,9 @@ const JANITOR_SPEED := 34.0
 
 var _won: bool = false
 var _patient_seen: bool = false
+## Bumped when the player leaves a sensor during the arm delay so pending awaits do nothing.
+var _sensor_arm_token: Array[int] = [0, 0, 0]
+var _janitor_elapsed: float = 0.0
 
 
 func _ready() -> void:
@@ -32,6 +40,7 @@ func _ready() -> void:
 
 	for i in range(_sensor_zones.size()):
 		_sensor_zones[i].body_entered.connect(_on_sensor_entered.bind(i))
+		_sensor_zones[i].body_exited.connect(_on_sensor_exited.bind(i))
 		_hazard_zones[i].body_entered.connect(_on_hazard_entered.bind(i))
 		_timers[i].timeout.connect(_on_segment_timeout.bind(i))
 		_set_segment_active(i, false)
@@ -50,9 +59,15 @@ func _process(delta: float) -> void:
 	if _won:
 		return
 
-	_janitor.position.y -= JANITOR_SPEED * delta
+	_janitor_elapsed += delta
+	var u := clampf(_janitor_elapsed / JANITOR_RAMP_DURATION, 0.0, 1.0)
+	# Ease-in so the start is noticeably slower.
+	u = u * u
+	var speed := lerpf(JANITOR_SPEED_MIN, JANITOR_SPEED_MAX, u)
+	_janitor.position.y -= speed * delta
 	if _janitor.position.y < -286.0:
 		_janitor.position.y = 340.0
+		_janitor_elapsed = 0.0
 
 
 func _physics_process(_delta: float) -> void:
@@ -72,9 +87,32 @@ func _physics_process(_delta: float) -> void:
 func _on_sensor_entered(body: Node2D, index: int) -> void:
 	if _won or body != _player:
 		return
+	if _hazard_zones[index].monitoring:
+		return
+	_sensor_arm_token[index] += 1
+	var token := _sensor_arm_token[index]
+	_ascii_lights[index].visible = true
+	GameAudio.play_sensor()
+	await get_tree().create_timer(HAZARD_ARM_DELAY).timeout
+	if not is_instance_valid(self) or _won:
+		return
+	if _sensor_arm_token[index] != token:
+		return
+	if not (_player in _sensor_zones[index].get_overlapping_bodies()):
+		_ascii_lights[index].visible = false
+		return
 	_set_segment_active(index, true)
 	_timers[index].wait_time = SEGMENT_ACTIVE_SECONDS
 	_timers[index].start()
+
+
+func _on_sensor_exited(body: Node2D, index: int) -> void:
+	if _won or body != _player:
+		return
+	if _hazard_zones[index].monitoring:
+		return
+	_sensor_arm_token[index] += 1
+	_ascii_lights[index].visible = false
 
 
 func _on_hazard_entered(body: Node2D, index: int) -> void:
@@ -91,6 +129,9 @@ func _on_segment_timeout(index: int) -> void:
 func _set_segment_active(index: int, active: bool) -> void:
 	_hazard_zones[index].monitoring = active
 	_ascii_lights[index].visible = active
+	if active:
+		GameAudio.play_hazard()
+		GameFx.screen_shake(7.0, 0.12)
 
 
 func _on_janitor_touch_entered(body: Node2D) -> void:
@@ -111,6 +152,8 @@ func _on_player_died() -> void:
 	if _won:
 		return
 	await get_tree().create_timer(0.25).timeout
+	if not is_instance_valid(self):
+		return
 	var gm := get_tree().get_first_node_in_group("game_main")
 	if gm and gm.has_method("restart_current_level"):
 		gm.restart_current_level()

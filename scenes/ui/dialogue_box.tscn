@@ -8,7 +8,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 14.0
-offset_top = -148.0
+offset_top = -168.0
 offset_right = -14.0
 offset_bottom = -14.0
 grow_horizontal = 2
@@ -24,20 +24,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+[node name="MarginContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
+theme_override_constants/separation = 6
 
 [node name="Label" type="Label" parent="Panel/MarginContainer"]
 layout_mode = 2
-size_flags_vertical = 1
+size_flags_vertical = 3
 autowrap_mode = 3
 text = " "
+
+[node name="FooterHint" type="Label" parent="Panel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+horizontal_alignment = 2
+text = "[Space / Enter / Click to continue]"
