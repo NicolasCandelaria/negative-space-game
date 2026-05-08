@@ -52,7 +52,7 @@ func _process(delta: float) -> void:
 
 	_janitor.position.y -= JANITOR_SPEED * delta
 	if _janitor.position.y < -286.0:
-		_janitor.position.y = 300.0
+		_janitor.position.y = 340.0
 
 
 func _physics_process(_delta: float) -> void:

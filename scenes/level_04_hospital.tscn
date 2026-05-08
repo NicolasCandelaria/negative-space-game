@@ -201,7 +201,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Janitor" type="Node2D" parent="."]
-position = Vector2(0, 260)
+position = Vector2(0, 340)
 
 [node name="Touch" type="Area2D" parent="Janitor"]
 collision_layer = 0
