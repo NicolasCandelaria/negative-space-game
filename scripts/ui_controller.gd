@@ -32,7 +32,7 @@ var _debug_visible: bool = false
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	layer = 110
+	layer = 100
 	_main = get_parent()
 	_hints.text = "WASD / arrows · hold LMB steer (opt.) · R restart · Esc pause · F3 debug"
 

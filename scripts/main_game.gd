@@ -45,7 +45,7 @@ func _ready() -> void:
 
 
 func start_at_level(idx: int) -> void:
-	_spawn_index(idx)
+	await _spawn_index(idx)
 
 
 func restart_current_level() -> void:
@@ -86,7 +86,7 @@ func _on_level_completed(finished_index: int) -> void:
 	var ga := Autoload.audio(get_tree())
 	if ga and ga.has_method("play_exit"):
 		ga.call("play_exit")
-	_spawn_index(finished_index + 1)
+	await _spawn_index(finished_index + 1)
 
 
 func _spawn_end_card() -> void:

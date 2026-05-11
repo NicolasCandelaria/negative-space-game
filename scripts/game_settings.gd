@@ -24,9 +24,9 @@ func load_all() -> void:
 	var cf := ConfigFile.new()
 	if cf.load(CFG_PATH) != OK:
 		return
-	last_level_index = int(cf.get_value("progress", "last_level", 0))
+	last_level_index = clampi(int(cf.get_value("progress", "last_level", 0)), 0, 8)
 	best_completed_index = int(cf.get_value("progress", "best_completed", -1))
-	dialogue_font_size = int(cf.get_value("prefs", "dialogue_font_size", 18))
+	dialogue_font_size = clampi(int(cf.get_value("prefs", "dialogue_font_size", 18)), 12, 28)
 	mouse_move_enabled = bool(cf.get_value("prefs", "mouse_move", false))
 	sfx_enabled = bool(cf.get_value("prefs", "sfx_enabled", true))
 

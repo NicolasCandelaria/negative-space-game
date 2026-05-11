@@ -9,7 +9,8 @@ var _box: Control
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_layer = CanvasLayer.new()
-	_layer.layer = 80
+	# Above gameplay UI (UILayer ~100) so clicks and Space reach the box first.
+	_layer.layer = 120
 	add_child(_layer)
 	_box = BOX_SCENE.instantiate()
 	_box.process_mode = Node.PROCESS_MODE_ALWAYS
