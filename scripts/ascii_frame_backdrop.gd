@@ -1,6 +1,6 @@
 extends RichTextLabel
 
-## Procedural textured ASCII frame with per-character BBCode color.
+## Uniform ASCII frame: consistent border glyphs, smooth edge shading, sparse structured interior.
 
 @export var frame_title: String = "STORAGE ROOM"
 @export_range(10, 24) var char_rows: int = 15
@@ -9,10 +9,6 @@ extends RichTextLabel
 
 ## 0 storage 1 garage 2 apartment 3 hospital 4 lighthouse 5 subway 6 power 7 house
 @export var palette_id: int = 0
-
-const BORDER_TOP := "#%@&*+=~^"
-const SIDE_CHARS := "|!:."
-const INNER_DUST := " .'`,:;~-"
 
 
 func _ready() -> void:
@@ -25,7 +21,7 @@ func _ready() -> void:
 	var sf := SystemFont.new()
 	sf.font_names = ["Consolas", "Courier New", "monospace"]
 	add_theme_font_override("normal_font", sf)
-	add_theme_font_size_override("normal_font_size", 15)
+	add_theme_font_size_override("normal_font_size", 14)
 	text = _build_frame()
 
 
@@ -79,45 +75,52 @@ func _pick_char(x: int, y: int) -> String:
 	if (x == 0 or x == char_cols - 1) and (y == 0 or y == char_rows - 1):
 		return "+"
 	if y == 0 or y == char_rows - 1:
-		var n := _nhash(x, y)
-		return BORDER_TOP[n % BORDER_TOP.length()]
+		return "#"
 	if x == 0 or x == char_cols - 1:
-		var n2 := _nhash(x * 2, y * 3)
-		return SIDE_CHARS[n2 % SIDE_CHARS.length()]
-	var d := _nhash(x * 3, y * 5) % 1000
-	if d < 34:
-		return INNER_DUST[d % INNER_DUST.length()]
-	if d < 42:
-		return String.chr(96)
+		return "|"
+	# Interior: mostly empty; one faint vertical guide + rare dots on a fixed grid
+	if x == char_cols / 2 and (y + y / 3) % 2 == 0:
+		return ":"
+	if (x * 5 + y * 7) % 17 == 0 and (x + y) % 2 == 0:
+		return "."
 	return " "
 
 
-func _nhash(ix: int, iy: int) -> int:
-	var s := sin(float(ix) * 0.71 + float(iy) * 0.53) * 43758.5453
-	return int(abs(sin(s + float(ix * iy)) * 10000.0)) % 10000
+func _edge_shade(x: int, y: int) -> float:
+	if y == 0:
+		return float(x) / float(maxi(1, char_cols - 1))
+	if y == char_rows - 1:
+		return float(char_cols - 1 - x) / float(maxi(1, char_cols - 1))
+	if x == 0:
+		return float(y) / float(maxi(1, char_rows - 1))
+	if x == char_cols - 1:
+		return float(char_rows - 1 - y) / float(maxi(1, char_rows - 1))
+	return 0.5
 
 
 func _pick_color(x: int, y: int, ch: String, is_title: bool) -> Color:
 	var base := _palette_base()
 	var edge := x == 0 or x == char_cols - 1 or y == 0 or y == char_rows - 1
-	var t := float(x + y) / float(char_cols + char_rows)
-	var pulse := 0.5 + 0.5 * sin(float(x) * 0.31 + float(y) * 0.27)
 
 	if is_title:
-		var hi := base.lightened(0.62 + 0.12 * pulse)
-		hi = hi.lerp(Color(0.95, 0.88, 0.45, 1.0), 0.42)
-		return hi
+		var gold := Color(0.92, 0.86, 0.48, 1.0)
+		return base.lightened(0.48).lerp(gold, 0.35)
 
 	if edge:
-		var stone := base.lerp(Color(0.52, 0.44, 0.34, 1.0), t * 0.65)
-		stone = stone.lerp(Color(0.88, 0.74, 0.52, 1.0), pulse * 0.5)
-		return stone
+		var sh := _edge_shade(x, y)
+		var stone_a := base.darkened(0.12)
+		var stone_b := base.lightened(0.18)
+		return stone_a.lerp(stone_b, sh * 0.85)
 
-	var void_c := base.darkened(0.58)
-	void_c = void_c.lerp(base, pulse * 0.1)
-	if ch != " ":
-		void_c = void_c.lerp(Color(0.32, 0.4, 0.48, 1.0), 0.22)
-	return void_c
+	# Interior: nearly flat with tiny horizontal drift
+	var drift := float(x) / float(maxi(1, char_cols)) * 0.04
+	var c := base.darkened(0.52)
+	c = c.lightened(drift)
+	if ch == ":":
+		c = c.lightened(0.08)
+	elif ch == ".":
+		c = c.lightened(0.05)
+	return c
 
 
 func _palette_base() -> Color:

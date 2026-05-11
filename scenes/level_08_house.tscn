@@ -71,13 +71,13 @@ monitoring = true
 shape = SubResource("Rect_photo")
 
 [node name="Ascii" type="Label" parent="PhotoA"]
-offset_left = -62.0
-offset_top = -18.0
-offset_right = 62.0
-offset_bottom = 18.0
+offset_left = -68.0
+offset_top = -40.0
+offset_right = 68.0
+offset_bottom = 40.0
 theme_override_colors/font_color = Color(0.85, 0.86, 0.92, 1)
-theme_override_font_sizes/font_size = 18
-text = "[ PHOTO I ]"
+theme_override_font_sizes/font_size = 14
+text = "+------------------+\n| PHOTO I          |\n|##################|\n|##################|\n+------------------+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -91,13 +91,13 @@ monitoring = true
 shape = SubResource("Rect_photo")
 
 [node name="Ascii" type="Label" parent="PhotoB"]
-offset_left = -62.0
-offset_top = -18.0
-offset_right = 62.0
-offset_bottom = 18.0
+offset_left = -68.0
+offset_top = -40.0
+offset_right = 68.0
+offset_bottom = 40.0
 theme_override_colors/font_color = Color(0.85, 0.86, 0.92, 1)
-theme_override_font_sizes/font_size = 18
-text = "[ PHOTO II ]"
+theme_override_font_sizes/font_size = 14
+text = "+------------------+\n| PHOTO II         |\n|##################|\n|##################|\n+------------------+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -111,13 +111,13 @@ monitoring = true
 shape = SubResource("Rect_book")
 
 [node name="Ascii" type="Label" parent="BookPoint"]
-offset_left = -58.0
-offset_top = -18.0
-offset_right = 58.0
-offset_bottom = 18.0
+offset_left = -64.0
+offset_top = -40.0
+offset_right = 64.0
+offset_bottom = 40.0
 theme_override_colors/font_color = Color(0.85, 0.86, 0.92, 1)
-theme_override_font_sizes/font_size = 18
-text = "[ BOOK ]"
+theme_override_font_sizes/font_size = 14
+text = "+----------------+\n| BOOK           |\n|################|\n|################|\n+----------------+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -131,25 +131,25 @@ monitoring = true
 shape = SubResource("Rect_man")
 
 [node name="ManAscii" type="Label" parent="ManZone"]
-offset_left = -70.0
-offset_top = -20.0
-offset_right = 70.0
-offset_bottom = 20.0
+offset_left = -76.0
+offset_top = -40.0
+offset_right = 76.0
+offset_bottom = 40.0
 theme_override_colors/font_color = Color(0.92, 0.92, 1, 1)
-theme_override_font_sizes/font_size = 18
-text = "[ MAN ]"
+theme_override_font_sizes/font_size = 14
+text = "+--------------------+\n| MAN                |\n|####################|\n|####################|\n+--------------------+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LampGlow" type="Label" parent="."]
 position = Vector2(278, 102)
-offset_left = -92.0
-offset_top = -16.0
-offset_right = 92.0
-offset_bottom = 16.0
+offset_left = -100.0
+offset_top = -32.0
+offset_right = 100.0
+offset_bottom = 32.0
 theme_override_colors/font_color = Color(1, 0.92, 0.66, 1)
-theme_override_font_sizes/font_size = 18
-text = "< lamp: ON >"
+theme_override_font_sizes/font_size = 14
+text = "########################\n### LAMP : ON ##########\n########################"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -165,12 +165,12 @@ shape = SubResource("Circle_lamp")
 [node name="EndingText" type="Label" parent="."]
 position = Vector2(0, -210)
 offset_left = -340.0
-offset_top = -20.0
+offset_top = -36.0
 offset_right = 340.0
-offset_bottom = 20.0
+offset_bottom = 36.0
 theme_override_colors/font_color = Color(0.75, 0.9, 1, 1)
-theme_override_font_sizes/font_size = 19
-text = "[ lamp clicked OFF ]"
+theme_override_font_sizes/font_size = 15
+text = "==================================================\n======== LAMP CLICKED OFF ========\n=================================================="
 horizontal_alignment = 1
 vertical_alignment = 1
 

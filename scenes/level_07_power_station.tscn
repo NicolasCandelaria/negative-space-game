@@ -89,13 +89,13 @@ monitoring = true
 shape = SubResource("Rect_switch")
 
 [node name="Ascii" type="Label" parent="SwitchA"]
-offset_left = -50.0
-offset_top = -18.0
-offset_right = 50.0
-offset_bottom = 18.0
+offset_left = -56.0
+offset_top = -40.0
+offset_right = 56.0
+offset_bottom = 40.0
 theme_override_colors/font_color = Color(0.62, 1, 1, 1)
-theme_override_font_sizes/font_size = 18
-text = "[ PULL A ]"
+theme_override_font_sizes/font_size = 14
+text = "+----------+\n| PULL A   |\n|##########|\n|##########|\n+----------+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -109,13 +109,13 @@ monitoring = true
 shape = SubResource("Rect_switch")
 
 [node name="Ascii" type="Label" parent="SwitchB"]
-offset_left = -50.0
-offset_top = -18.0
-offset_right = 50.0
-offset_bottom = 18.0
+offset_left = -56.0
+offset_top = -40.0
+offset_right = 56.0
+offset_bottom = 40.0
 theme_override_colors/font_color = Color(0.62, 1, 1, 1)
-theme_override_font_sizes/font_size = 18
-text = "[ PULL B ]"
+theme_override_font_sizes/font_size = 14
+text = "+----------+\n| PULL B   |\n|##########|\n|##########|\n+----------+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -129,13 +129,13 @@ monitoring = true
 shape = SubResource("Rect_switch")
 
 [node name="Ascii" type="Label" parent="SwitchC"]
-offset_left = -50.0
-offset_top = -18.0
-offset_right = 50.0
-offset_bottom = 18.0
+offset_left = -56.0
+offset_top = -40.0
+offset_right = 56.0
+offset_bottom = 40.0
 theme_override_colors/font_color = Color(0.62, 1, 1, 1)
-theme_override_font_sizes/font_size = 18
-text = "[ PULL C ]"
+theme_override_font_sizes/font_size = 14
+text = "+----------+\n| PULL C   |\n|##########|\n|##########|\n+----------+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -150,12 +150,12 @@ shape = SubResource("Rect_bridge_a")
 [node name="Ascii" type="Label" parent="BridgeA"]
 visible = false
 offset_left = -80.0
-offset_top = -18.0
+offset_top = -36.0
 offset_right = 80.0
-offset_bottom = 18.0
+offset_bottom = 36.0
 theme_override_colors/font_color = Color(0.72, 0.94, 1, 1)
-theme_override_font_sizes/font_size = 18
-text = "=============="
+theme_override_font_sizes/font_size = 15
+text = "================\n================\n================\n================"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -170,12 +170,12 @@ shape = SubResource("Rect_bridge_b")
 [node name="Ascii" type="Label" parent="BridgeB"]
 visible = false
 offset_left = -80.0
-offset_top = -18.0
+offset_top = -36.0
 offset_right = 80.0
-offset_bottom = 18.0
+offset_bottom = 36.0
 theme_override_colors/font_color = Color(0.72, 0.94, 1, 1)
-theme_override_font_sizes/font_size = 18
-text = "=============="
+theme_override_font_sizes/font_size = 15
+text = "================\n================\n================\n================"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -190,12 +190,12 @@ shape = SubResource("Rect_bridge_c")
 [node name="Ascii" type="Label" parent="BridgeC"]
 visible = false
 offset_left = -80.0
-offset_top = -18.0
+offset_top = -36.0
 offset_right = 80.0
-offset_bottom = 18.0
+offset_bottom = 36.0
 theme_override_colors/font_color = Color(0.72, 0.94, 1, 1)
-theme_override_font_sizes/font_size = 18
-text = "=============="
+theme_override_font_sizes/font_size = 15
+text = "================\n================\n================\n================"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -211,13 +211,13 @@ monitoring = true
 shape = SubResource("Rect_guard_touch")
 
 [node name="Ascii" type="Label" parent="Guard"]
-offset_left = -42.0
-offset_top = -16.0
-offset_right = 42.0
-offset_bottom = 16.0
+offset_left = -48.0
+offset_top = -32.0
+offset_right = 48.0
+offset_bottom = 32.0
 theme_override_colors/font_color = Color(1, 0.66, 0.58, 1)
-theme_override_font_sizes/font_size = 18
-text = "[G]"
+theme_override_font_sizes/font_size = 15
+text = " [G]  \n######\n######\n######"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -231,13 +231,13 @@ monitoring = true
 shape = SubResource("Rect_exit")
 
 [node name="ExitAscii" type="Label" parent="ExitZone"]
-offset_left = -66.0
-offset_top = -18.0
-offset_right = 66.0
-offset_bottom = 18.0
+offset_left = -80.0
+offset_top = -36.0
+offset_right = 80.0
+offset_bottom = 36.0
 theme_override_colors/font_color = Color(0.62, 1, 1, 1)
-theme_override_font_sizes/font_size = 18
-text = "< CONTROL >"
+theme_override_font_sizes/font_size = 15
+text = "+========== CONTROL ==========+\n|############################|\n|############################|\n+============================+"
 horizontal_alignment = 1
 vertical_alignment = 1
 

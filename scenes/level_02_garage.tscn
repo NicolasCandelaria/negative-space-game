@@ -72,13 +72,13 @@ color = Color(0, 0, 0, 0)
 polygon = PackedVector2Array(-36, -36, 36, -36, 36, 36, -36, 36)
 
 [node name="Ascii" type="Label" parent="Pillar1"]
-offset_left = -28.0
-offset_top = -18.0
-offset_right = 28.0
-offset_bottom = 19.0
+offset_left = -36.0
+offset_top = -40.0
+offset_right = 36.0
+offset_bottom = 40.0
 theme_override_colors/font_color = Color(0.84, 0.84, 0.9, 1)
-theme_override_font_sizes/font_size = 18
-text = "[#]"
+theme_override_font_sizes/font_size = 16
+text = "########\n########\n########\n########\n########"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -95,13 +95,13 @@ color = Color(0, 0, 0, 0)
 polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 
 [node name="Ascii" type="Label" parent="Pillar2"]
-offset_left = -28.0
-offset_top = -18.0
-offset_right = 28.0
-offset_bottom = 19.0
+offset_left = -36.0
+offset_top = -40.0
+offset_right = 36.0
+offset_bottom = 40.0
 theme_override_colors/font_color = Color(0.84, 0.84, 0.9, 1)
-theme_override_font_sizes/font_size = 18
-text = "[#]"
+theme_override_font_sizes/font_size = 16
+text = "########\n########\n########\n########\n########"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -118,13 +118,13 @@ color = Color(0, 0, 0, 0)
 polygon = PackedVector2Array(-34, -34, 34, -34, 34, 34, -34, 34)
 
 [node name="Ascii" type="Label" parent="Pillar3"]
-offset_left = -28.0
-offset_top = -18.0
-offset_right = 28.0
-offset_bottom = 19.0
+offset_left = -36.0
+offset_top = -40.0
+offset_right = 36.0
+offset_bottom = 40.0
 theme_override_colors/font_color = Color(0.84, 0.84, 0.9, 1)
-theme_override_font_sizes/font_size = 18
-text = "[#]"
+theme_override_font_sizes/font_size = 16
+text = "########\n########\n########\n########\n########"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -144,14 +144,14 @@ color = Color(0, 0, 0, 0)
 polygon = PackedVector2Array(0, 0, 300, 92, 300, -92)
 
 [node name="ConeAscii" type="Label" parent="PatrolRig/ConeKill"]
-offset_left = 32.0
-offset_top = -16.0
-offset_right = 140.0
-offset_bottom = 16.0
+offset_left = 24.0
+offset_top = -36.0
+offset_right = 168.0
+offset_bottom = 36.0
 rotation = 0.0
 theme_override_colors/font_color = Color(1, 0.9, 0.62, 1)
-theme_override_font_sizes/font_size = 18
-text = ">>>"
+theme_override_font_sizes/font_size = 15
+text = ">>>>>>>>>>>>>>>>\n>>>>>>>>>>>>>>>>\n>>>>>>>>>>>>>>>>"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -162,13 +162,13 @@ polygon = PackedVector2Array(-10, -10, 14, 0, -10, 10, -16, 0)
 
 [node name="GuardAscii" type="Label" parent="PatrolRig"]
 z_index = 2
-offset_left = -14.0
-offset_top = -18.0
-offset_right = 14.0
-offset_bottom = 14.0
+offset_left = -22.0
+offset_top = -28.0
+offset_right = 22.0
+offset_bottom = 26.0
 theme_override_colors/font_color = Color(1, 0.6, 0.55, 1)
-theme_override_font_sizes/font_size = 20
-text = "G"
+theme_override_font_sizes/font_size = 16
+text = " [G]\n#####\n#####\n#####"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -187,13 +187,13 @@ color = Color(0, 0, 0, 0)
 polygon = PackedVector2Array(-78, -32, 78, -32, 78, 32, -78, 32)
 
 [node name="AsciiExit" type="Label" parent="WinZone"]
-offset_left = -80.0
-offset_top = -16.0
-offset_right = 80.0
-offset_bottom = 16.0
+offset_left = -96.0
+offset_top = -28.0
+offset_right = 96.0
+offset_bottom = 28.0
 theme_override_colors/font_color = Color(0.62, 1, 1, 1)
-theme_override_font_sizes/font_size = 18
-text = "=== EXIT ==="
+theme_override_font_sizes/font_size = 16
+text = "+========== EXIT ==========+\n|##########################|\n|##########################|\n+==========================+"
 horizontal_alignment = 1
 vertical_alignment = 1
 

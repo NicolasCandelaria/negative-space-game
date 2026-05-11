@@ -81,13 +81,13 @@ color = Color(0, 0, 0, 0)
 polygon = PackedVector2Array(-32, -96, 32, -96, 32, 96, -32, 96)
 
 [node name="Ascii" type="Label" parent="ShelfWest"]
-offset_left = -44.0
-offset_top = -66.0
-offset_right = 44.0
-offset_bottom = 67.0
+offset_left = -56.0
+offset_top = -88.0
+offset_right = 56.0
+offset_bottom = 88.0
 theme_override_colors/font_color = Color(0.85, 0.85, 0.88, 1)
-theme_override_font_sizes/font_size = 18
-text = "####\n####\n####\n####"
+theme_override_font_sizes/font_size = 16
+text = "##############\n##############\n##############\n##############\n##############\n##############\n##############\n##############"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -104,13 +104,13 @@ color = Color(0, 0, 0, 0)
 polygon = PackedVector2Array(-32, -120, 32, -120, 32, 120, -32, 120)
 
 [node name="Ascii" type="Label" parent="ShelfEast"]
-offset_left = -44.0
-offset_top = -78.0
-offset_right = 44.0
-offset_bottom = 79.0
+offset_left = -56.0
+offset_top = -100.0
+offset_right = 56.0
+offset_bottom = 100.0
 theme_override_colors/font_color = Color(0.85, 0.85, 0.88, 1)
-theme_override_font_sizes/font_size = 18
-text = "####\n####\n####\n####\n####"
+theme_override_font_sizes/font_size = 16
+text = "##############\n##############\n##############\n##############\n##############\n##############\n##############\n##############\n##############\n##############"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -147,13 +147,13 @@ color = Color(0, 0, 0, 0)
 polygon = PackedVector2Array(-44, -26, 44, -26, 44, 26, -44, 26)
 
 [node name="AsciiExit" type="Label" parent="Exit"]
-offset_left = -52.0
-offset_top = -15.0
-offset_right = 52.0
-offset_bottom = 16.0
+offset_left = -72.0
+offset_top = -22.0
+offset_right = 72.0
+offset_bottom = 22.0
 theme_override_colors/font_color = Color(0.6, 1, 0.7, 1)
-theme_override_font_sizes/font_size = 18
-text = "[ EXIT ]"
+theme_override_font_sizes/font_size = 16
+text = "+========== EXIT ==========+\n|##########################|\n|##########################|\n+==========================+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
