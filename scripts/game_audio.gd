@@ -1,6 +1,6 @@
 extends Node
 
-## Procedural one-shot beeps (no external assets). Respects GameSettings.sfx_enabled.
+## Procedural one-shot beeps (no external assets). Respects /root/GameSettings sfx_enabled.
 
 var _player: AudioStreamPlayer
 
@@ -14,7 +14,8 @@ func _ready() -> void:
 
 
 func _can_play() -> bool:
-	return GameSettings.sfx_enabled
+	var gs := get_node_or_null("/root/GameSettings")
+	return gs != null and bool(gs.get("sfx_enabled"))
 
 
 func _tone(freq: float, ms: float, vol: float = 0.22) -> AudioStreamWAV:

@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+const Autoload := preload("res://scripts/autoload_access.gd")
+
 ## Boot menu, pause, hints, web audio gate, debug overlay.
 
 @onready var _hints: Label = $Hints
@@ -41,20 +43,24 @@ func _ready() -> void:
 
 	_controls_block.text = "Move: WASD or Arrow keys\nRestart level: R\nPause: Esc\nAdvance dialogue: Space / Enter / Click"
 
-	_pause_mouse.button_pressed = GameSettings.mouse_move_enabled
-	_pause_sfx.button_pressed = GameSettings.sfx_enabled
-	GameSettings.mouse_move_changed.connect(func(v): _pause_mouse.button_pressed = v)
-	GameSettings.sfx_changed.connect(func(v): _pause_sfx.button_pressed = v)
+	var gs := _gs()
+	if gs:
+		_pause_mouse.button_pressed = bool(gs.get("mouse_move_enabled"))
+		_pause_sfx.button_pressed = bool(gs.get("sfx_enabled"))
+		if gs.has_signal("mouse_move_changed"):
+			gs.connect("mouse_move_changed", func(v): _pause_mouse.button_pressed = v)
+		if gs.has_signal("sfx_changed"):
+			gs.connect("sfx_changed", func(v): _pause_sfx.button_pressed = v)
 
 	_boot_continue.pressed.connect(_on_boot_continue)
 	_boot_new.pressed.connect(_on_boot_new)
 	_pause_resume.pressed.connect(_unpause)
 	_pause_restart.pressed.connect(_on_pause_restart)
 	_pause_full.pressed.connect(_toggle_fullscreen)
-	_pause_mouse.toggled.connect(func(p): GameSettings.set_mouse_move_enabled(p))
-	_pause_sfx.toggled.connect(func(p): GameSettings.set_sfx_enabled(p))
-	_pause_small.pressed.connect(func(): GameSettings.set_dialogue_font_size(16))
-	_pause_large.pressed.connect(func(): GameSettings.set_dialogue_font_size(22))
+	_pause_mouse.toggled.connect(_on_mouse_toggled)
+	_pause_sfx.toggled.connect(_on_sfx_toggled)
+	_pause_small.pressed.connect(func(): _call_settings("set_dialogue_font_size", 16))
+	_pause_large.pressed.connect(func(): _call_settings("set_dialogue_font_size", 22))
 
 	_web_gate.visible = false
 
@@ -65,6 +71,28 @@ func _ready() -> void:
 		_main.level_loaded.connect(_on_main_level_loaded)
 
 	call_deferred("_bootstrap_flow")
+
+
+func _gs() -> Node:
+	return Autoload.settings(get_tree())
+
+
+func _call_settings(method: String, arg = null) -> void:
+	var gs := _gs()
+	if gs == null or not gs.has_method(method):
+		return
+	if arg == null:
+		gs.call(method)
+	else:
+		gs.call(method, arg)
+
+
+func _on_mouse_toggled(p: bool) -> void:
+	_call_settings("set_mouse_move_enabled", p)
+
+
+func _on_sfx_toggled(p: bool) -> void:
+	_call_settings("set_sfx_enabled", p)
 
 
 func _bootstrap_flow() -> void:
@@ -78,7 +106,11 @@ func _bootstrap_flow() -> void:
 
 
 func _flow_boot() -> void:
-	if GameSettings.should_show_boot_menu():
+	var gs := _gs()
+	var show_boot := false
+	if gs and gs.has_method("should_show_boot_menu"):
+		show_boot = bool(gs.call("should_show_boot_menu"))
+	if show_boot:
 		_boot.visible = true
 		_boot_continue.visible = true
 		_boot_continue.disabled = false
@@ -87,11 +119,16 @@ func _flow_boot() -> void:
 
 
 func _continue_index() -> int:
-	return clampi(GameSettings.last_level_index, 0, 8)
+	var gs := _gs()
+	if gs:
+		return clampi(int(gs.get("last_level_index")), 0, 8)
+	return 0
 
 
 func _on_web_unlock() -> void:
-	GameAudio.unlock_web_audio()
+	var ga := Autoload.audio(get_tree())
+	if ga and ga.has_method("unlock_web_audio"):
+		ga.call("unlock_web_audio")
 	_web_gate.visible = false
 	get_tree().paused = false
 	_flow_boot()
@@ -103,7 +140,7 @@ func _on_boot_continue() -> void:
 
 
 func _on_boot_new() -> void:
-	GameSettings.reset_progress()
+	_call_settings("reset_progress")
 	_boot.visible = false
 	_main.call("start_at_level", 0)
 

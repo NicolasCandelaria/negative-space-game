@@ -1,6 +1,7 @@
 extends Node
 
 const DialogueUi := preload("res://scripts/dialogue_helper.gd")
+const Autoload := preload("res://scripts/autoload_access.gd")
 
 const LEVEL_SCENES = [
 	"res://scenes/level_01_storage.tscn",
@@ -38,7 +39,9 @@ var current_level_index: int:
 
 func _ready() -> void:
 	add_to_group("game_main")
-	GameSettings.load_all()
+	var gs := Autoload.settings(get_tree())
+	if gs and gs.has_method("load_all"):
+		gs.call("load_all")
 
 
 func start_at_level(idx: int) -> void:
@@ -68,15 +71,21 @@ func _spawn_index(i: int) -> void:
 	var packed: PackedScene = load(LEVEL_SCENES[i])
 	var inst: Node = packed.instantiate()
 	_slot.add_child(inst)
-	GameSettings.on_level_started(i)
+	var gs2 := Autoload.settings(get_tree())
+	if gs2 and gs2.has_method("on_level_started"):
+		gs2.call("on_level_started", i)
 	level_loaded.emit(i, LEVEL_NAMES[i])
 	if inst.has_signal("completed"):
 		inst.completed.connect(_on_level_completed.bind(i))
 
 
 func _on_level_completed(finished_index: int) -> void:
-	GameSettings.on_level_completed(finished_index)
-	GameAudio.play_exit()
+	var gs3 := Autoload.settings(get_tree())
+	if gs3 and gs3.has_method("on_level_completed"):
+		gs3.call("on_level_completed", finished_index)
+	var ga := Autoload.audio(get_tree())
+	if ga and ga.has_method("play_exit"):
+		ga.call("play_exit")
 	_spawn_index(finished_index + 1)
 
 

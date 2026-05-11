@@ -1,6 +1,7 @@
 extends Node2D
 
 const DialogueUi := preload("res://scripts/dialogue_helper.gd")
+const Autoload := preload("res://scripts/autoload_access.gd")
 
 ## Level 4: Hospital corridor.
 ## Crossing sensor zones triggers local bright light (temporarily lethal).
@@ -92,7 +93,9 @@ func _on_sensor_entered(body: Node2D, index: int) -> void:
 	_sensor_arm_token[index] += 1
 	var token := _sensor_arm_token[index]
 	_ascii_lights[index].visible = true
-	GameAudio.play_sensor()
+	var ga1 := Autoload.audio(get_tree())
+	if ga1 and ga1.has_method("play_sensor"):
+		ga1.call("play_sensor")
 	await get_tree().create_timer(HAZARD_ARM_DELAY).timeout
 	if not is_instance_valid(self) or _won:
 		return
@@ -130,8 +133,12 @@ func _set_segment_active(index: int, active: bool) -> void:
 	_hazard_zones[index].monitoring = active
 	_ascii_lights[index].visible = active
 	if active:
-		GameAudio.play_hazard()
-		GameFx.screen_shake(7.0, 0.12)
+		var ga2 := Autoload.audio(get_tree())
+		if ga2 and ga2.has_method("play_hazard"):
+			ga2.call("play_hazard")
+		var gfx := Autoload.fx(get_tree())
+		if gfx and gfx.has_method("screen_shake"):
+			gfx.call("screen_shake", 7.0, 0.12)
 
 
 func _on_janitor_touch_entered(body: Node2D) -> void:

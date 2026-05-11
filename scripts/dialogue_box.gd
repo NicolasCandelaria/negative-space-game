@@ -1,5 +1,7 @@
 extends Control
 
+const Autoload := preload("res://scripts/autoload_access.gd")
+
 signal dialogue_dismissed
 
 @onready var _panel: Panel = $Panel
@@ -23,13 +25,18 @@ func _ready() -> void:
 	_label.add_theme_font_override("font", sf)
 	_hint.add_theme_font_override("font", sf)
 	_apply_font_size()
-	GameSettings.dialogue_font_size_changed.connect(func(_s): _apply_font_size())
+	var gs := Autoload.settings(get_tree())
+	if gs:
+		gs.connect("dialogue_font_size_changed", func(_s): _apply_font_size())
 	_hint.text = "[Space / Enter / Click to continue]"
 	_hint.add_theme_color_override("font_color", Color(0.45, 0.85, 0.65, 0.95))
 
 
 func _apply_font_size() -> void:
-	var sz: int = GameSettings.dialogue_font_size
+	var sz: int = 18
+	var gs := Autoload.settings(get_tree())
+	if gs:
+		sz = int(gs.get("dialogue_font_size"))
 	_label.add_theme_font_size_override("font_size", sz)
 	_hint.add_theme_font_size_override("font_size", maxi(12, sz - 4))
 
